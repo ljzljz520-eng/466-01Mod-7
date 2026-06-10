@@ -10,7 +10,8 @@ api.interceptors.response.use(
     response => response.data,
     error => {
         if (error.response) {
-            ElMessage.error(error.response.data.message || '请求失败')
+            const msg = error.response.data?.message || error.response.data?.error || '请求失败'
+            ElMessage.error(msg)
         } else {
             ElMessage.error('网络错误或服务器不可达')
         }

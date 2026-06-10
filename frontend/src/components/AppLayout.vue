@@ -10,20 +10,24 @@
             Sky-Lark
           </h1>
         </div>
-        <nav class="flex gap-6">
-          <router-link 
-            to="/" 
-            class="nav-link"
-            active-class="nav-link-active"
-          >
+        <nav class="flex gap-4 flex-wrap">
+          <router-link to="/" class="nav-link" active-class="nav-link-active">
             首页
           </router-link>
-          <router-link 
-            to="/about" 
-            class="nav-link"
-            active-class="nav-link-active"
-          >
-            关于我们
+          <router-link to="/booking" class="nav-link" active-class="nav-link-active">
+            仪器预约
+          </router-link>
+          <router-link to="/appointments" class="nav-link" active-class="nav-link-active">
+            我的预约
+          </router-link>
+          <router-link to="/budget" class="nav-link" active-class="nav-link-active">
+            项目额度
+          </router-link>
+          <router-link to="/settlement" class="nav-link" active-class="nav-link-active">
+            结算管理
+          </router-link>
+          <router-link to="/about" class="nav-link" active-class="nav-link-active">
+            关于
           </router-link>
         </nav>
       </div>
@@ -32,7 +36,7 @@
       <slot></slot>
     </main>
     <footer class="bg-white border-t border-slate-100 py-6 text-center text-slate-400 text-sm">
-      <p>&copy; 2026 Sky-Lark 项目框架，为开发者打造 <span class="text-red-400">❤</span></p>
+      <p>&copy; 2026 Sky-Lark 大型仪器预约管理平台</p>
     </footer>
   </div>
 </template>

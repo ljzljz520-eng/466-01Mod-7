@@ -8,15 +8,22 @@ Thumbs.db
 *.iml
 *.swp
 
-# Build
+# Java / Maven
 target/
+*.log
+
+# Frontend build
 dist/
 build/
 node_modules/
-npm-debug.log
-yarn-error.log
-package-lock.json
-yarn.lock
+coverage/
+.vite/
+*.tsbuildinfo
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# Docker
+# Local env
 .env
+.env.*
+!.env.example

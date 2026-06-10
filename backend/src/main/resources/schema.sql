@@ -3,3 +3,56 @@ CREATE TABLE IF NOT EXISTS record_entity (
     name VARCHAR(255) NOT NULL,
     description VARCHAR(255)
 );
+
+CREATE TABLE IF NOT EXISTS instrument (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    type VARCHAR(100) NOT NULL,
+    rate_per_hour DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    consumable_fee DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    urgent_surcharge_rate DECIMAL(5,2) NOT NULL DEFAULT 0.00,
+    status VARCHAR(50) NOT NULL DEFAULT 'AVAILABLE',
+    description VARCHAR(500)
+);
+
+CREATE TABLE IF NOT EXISTS pi_account (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    pi_name VARCHAR(255) NOT NULL,
+    group_name VARCHAR(255) NOT NULL,
+    balance DECIMAL(12,2) NOT NULL DEFAULT 0.00,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS appointment (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    instrument_id BIGINT NOT NULL,
+    pi_account_id BIGINT NOT NULL,
+    user_name VARCHAR(255) NOT NULL,
+    user_role VARCHAR(50) NOT NULL DEFAULT 'STUDENT',
+    booked_hours DECIMAL(5,1) NOT NULL,
+    use_consumables BOOLEAN NOT NULL DEFAULT FALSE,
+    is_urgent BOOLEAN NOT NULL DEFAULT FALSE,
+    estimated_cost DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    actual_hours DECIMAL(5,1),
+    actual_cost DECIMAL(10,2),
+    status VARCHAR(50) NOT NULL DEFAULT 'PENDING',
+    adjustment_amount DECIMAL(10,2),
+    adjustment_reason VARCHAR(500),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (instrument_id) REFERENCES instrument(id),
+    FOREIGN KEY (pi_account_id) REFERENCES pi_account(id)
+);
+
+CREATE TABLE IF NOT EXISTS billing_record (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    appointment_id BIGINT NOT NULL,
+    pi_account_id BIGINT NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    description VARCHAR(500),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (appointment_id) REFERENCES appointment(id),
+    FOREIGN KEY (pi_account_id) REFERENCES pi_account(id)
+);
