@@ -31,17 +31,17 @@ SELECT * FROM (SELECT 'ZEISS 扫描电镜', 'EM', 400.00, 90.00, 0.50, 'MAINTENA
 WHERE NOT EXISTS (SELECT 1 FROM instrument WHERE name = 'ZEISS 扫描电镜') LIMIT 1;
 
 INSERT INTO pi_account (pi_name, group_name, balance, created_at, updated_at)
-SELECT * FROM (SELECT '张明远', '有机合成课题组', 50000.00, NOW(), NOW()) AS tmp
+SELECT * FROM (SELECT '张明远', '有机合成课题组', 50000.00, NOW() AS created_at, NOW() AS updated_at) AS tmp
 WHERE NOT EXISTS (SELECT 1 FROM pi_account WHERE group_name = '有机合成课题组') LIMIT 1;
 
 INSERT INTO pi_account (pi_name, group_name, balance, created_at, updated_at)
-SELECT * FROM (SELECT '李慧琳', '基因组学课题组', 80000.00, NOW(), NOW()) AS tmp
+SELECT * FROM (SELECT '李慧琳', '基因组学课题组', 80000.00, NOW() AS created_at, NOW() AS updated_at) AS tmp
 WHERE NOT EXISTS (SELECT 1 FROM pi_account WHERE group_name = '基因组学课题组') LIMIT 1;
 
 INSERT INTO pi_account (pi_name, group_name, balance, created_at, updated_at)
-SELECT * FROM (SELECT '王建国', '纳米材料课题组', 3000.00, NOW(), NOW()) AS tmp
+SELECT * FROM (SELECT '王建国', '纳米材料课题组', 3000.00, NOW() AS created_at, NOW() AS updated_at) AS tmp
 WHERE NOT EXISTS (SELECT 1 FROM pi_account WHERE group_name = '纳米材料课题组') LIMIT 1;
 
 INSERT INTO pi_account (pi_name, group_name, balance, created_at, updated_at)
-SELECT * FROM (SELECT '陈雪梅', '药物化学课题组', 25000.00, NOW(), NOW()) AS tmp
+SELECT * FROM (SELECT '陈雪梅', '药物化学课题组', 25000.00, NOW() AS created_at, NOW() AS updated_at) AS tmp
 WHERE NOT EXISTS (SELECT 1 FROM pi_account WHERE group_name = '药物化学课题组') LIMIT 1;
